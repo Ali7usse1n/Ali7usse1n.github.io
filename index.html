@@ -7,11 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #fdfaf5;
-            color: #2c2c2c;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
             scroll-behavior: smooth;
         }
         .hero-bg {
@@ -19,365 +19,333 @@
             background-size: cover;
             background-position: center;
         }
-        .menu-item-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            height: 100%;
+        /* Sticky Tabs Styles */
+        .sticky-tabs {
+            position: sticky;
+            top: 64px; /* Height of Navbar */
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-blur: 10px;
+            border-bottom: 1px solid #f3f4f6;
+            padding: 12px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .tabs-container {
             display: flex;
-            flex-direction: column;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 10px;
+            padding: 0 15px;
+            justify-content: center;
         }
-        .menu-item-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.1);
+        .tabs-container::-webkit-scrollbar {
+            display: none;
         }
-        .price-tag {
-            background: #c2410c;
-            color: white;
-            padding: 6px 15px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #c2410c;
-            border-radius: 2px;
-        }
-        /* Tab Styles */
         .tab-btn {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            background: #f3f4f6;
+            color: #4b5563;
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .tab-btn.active {
-            background-color: #c2410c;
+            background: #f97316;
             color: white;
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(194, 65, 12, 0.4);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
         }
+        .tab-btn i {
+            font-size: 1rem;
+        }
+
+        /* Menu List Styles */
+        .menu-list-item {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+            background: white;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            border: 1px solid #f3f4f6;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .menu-list-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .menu-list-item:hover {
+            border-color: #f97316;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            transform: scale(1.01);
+        }
+        .item-img {
+            width: 65px;
+            height: 65px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-left: 14px;
+            flex-shrink: 0;
+        }
+        .item-info {
+            flex-grow: 1;
+        }
+        .item-name {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 2px;
+        }
+        .item-price {
+            font-weight: 900;
+            color: #f97316;
+            font-size: 1rem;
+            white-space: nowrap;
+            background: #fff7ed;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+
         .menu-category-content {
             display: none;
-            animation: fadeInUp 0.5s ease forwards;
+            padding-top: 20px;
         }
         .menu-category-content.active {
             display: block;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        
+        @media (max-width: 640px) {
+            .tabs-container {
+                justify-content: flex-start;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .sticky-tabs {
+                top: 56px; /* Adjust for mobile navbar height */
             }
-        }
-        .category-badge {
-            background: #fff7ed;
-            color: #c2410c;
-            padding: 2px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: inline-block;
+            .item-img {
+                width: 55px;
+                height: 55px;
+            }
+            .item-name {
+                font-size: 1rem;
+            }
+            .item-price {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body class="bg-stone-50">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+    <nav class="fixed w-full z-50 bg-white border-b border-stone-200 shadow-sm h-14 md:h-16 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <span class="text-3xl font-bold text-orange-800 tracking-tight">كافتيريا الربيع</span>
+                    <span class="text-xl md:text-2xl font-black text-orange-700 tracking-tight">كافتيريا الربيع</span>
                 </div>
-                <div class="hidden md:flex items-center space-x-10 space-x-reverse">
-                    <a href="#home" class="text-stone-700 hover:text-orange-800 font-bold transition-colors">الرئيسية</a>
-                    <a href="#menu" class="text-stone-700 hover:text-orange-800 font-bold transition-colors">المنيو</a>
-                    <a href="#about" class="text-stone-700 hover:text-orange-800 font-bold transition-colors">من نحن</a>
-                    <a href="#contact" class="text-stone-700 hover:text-orange-800 font-bold transition-colors">اتصل بنا</a>
+                <div class="hidden md:flex items-center space-x-8 space-x-reverse">
+                    <a href="#home" class="text-stone-700 hover:text-orange-600 font-bold text-sm">الرئيسية</a>
+                    <a href="#menu" class="text-stone-700 hover:text-orange-600 font-bold text-sm">المنيو</a>
+                    <a href="#contact" class="text-stone-700 hover:text-orange-600 font-bold text-sm">اتصل بنا</a>
                 </div>
                 <div class="md:hidden">
-                    <button class="text-stone-700 p-2"><i class="fas fa-bars text-2xl"></i></button>
+                    <button class="text-stone-700 p-2"><i class="fas fa-bars text-xl"></i></button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center text-white relative">
+    <section id="home" class="hero-bg h-[35vh] flex items-center justify-center text-center text-white relative pt-14">
         <div class="container mx-auto px-4">
-            <div class="bg-black/30 backdrop-blur-[3px] p-10 md:p-20 rounded-[40px] inline-block border border-white/10 shadow-2xl">
-                <h1 class="text-7xl md:text-9xl font-bold mb-8 drop-shadow-2xl">كافتيريا الربيع</h1>
-                <p class="text-xl md:text-3xl mb-12 opacity-95 max-w-3xl mx-auto font-light leading-relaxed">
-                    مذاق الأصالة في كل كوب، وتجربة فريدة في كل جلسة
-                </p>
-                <div class="flex flex-col sm:flex-row gap-8 justify-center">
-                    <a href="#menu" class="bg-orange-600 hover:bg-orange-700 text-white px-14 py-5 rounded-full text-2xl font-bold transition-all transform hover:scale-105 shadow-xl flex items-center justify-center">
-                        <i class="fas fa-utensils ml-3"></i> استكشف المنيو
-                    </a>
-                </div>
-            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-2 drop-shadow-lg">كافتيريا الربيع</h1>
+            <p class="text-base md:text-lg opacity-90 max-w-xl mx-auto font-bold">مذاق الأصالة في كل كوب، وتجربة فريدة في كل جلسة</p>
         </div>
     </section>
 
-    <!-- Menu Section with Tabs -->
-    <section id="menu" class="py-32">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-6xl font-bold text-stone-800 section-title">قائمة المذاق الرفيع</h2>
-                <p class="text-stone-500 mt-6 text-xl max-w-2xl mx-auto">اختر الفئة التي تفضلها لتشاهد تشكيلتنا المختارة</p>
-            </div>
+    <!-- Sticky Menu Tabs -->
+    <div class="sticky-tabs" id="menu">
+        <div class="tabs-container">
+            <button onclick="showCategory('shisha')" id="btn-shisha" class="tab-btn active">
+                <i class="fas fa-wind"></i> أراجيل
+            </button>
+            <button onclick="showCategory('juices')" id="btn-juices" class="tab-btn">
+                <i class="fas fa-glass-water"></i> عصائر
+            </button>
+            <button onclick="showCategory('coffee')" id="btn-coffee" class="tab-btn">
+                <i class="fas fa-mug-hot"></i> ساخن
+            </button>
+            <button onclick="showCategory('food')" id="btn-food" class="tab-btn">
+                <i class="fas fa-hamburger"></i> مأكولات
+            </button>
+            <button onclick="showCategory('sweets')" id="btn-sweets" class="tab-btn">
+                <i class="fas fa-ice-cream"></i> حلويات
+            </button>
+            <button onclick="showCategory('market')" id="btn-market" class="tab-btn">
+                <i class="fas fa-store"></i> ماركت
+            </button>
+        </div>
+    </div>
 
-            <!-- Tab Navigation -->
-            <div class="flex flex-wrap justify-center gap-4 mb-20">
-                <button onclick="showCategory('shisha')" id="btn-shisha" class="tab-btn active px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
-                    <i class="fas fa-wind"></i> الأراجيل
-                </button>
-                <button onclick="showCategory('juices')" id="btn-juices" class="tab-btn px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
-                    <i class="fas fa-glass-water"></i> العصائر
-                </button>
-                <button onclick="showCategory('coffee')" id="btn-coffee" class="tab-btn px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
-                    <i class="fas fa-mug-hot"></i> المشروبات الساخنة
-                </button>
-                <button onclick="showCategory('food')" id="btn-food" class="tab-btn px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
-                    <i class="fas fa-utensils"></i> المأكولات والحلويات
-                </button>
-            </div>
-
-            <!-- Tab Content -->
+    <!-- Menu Section -->
+    <section class="py-6 bg-white min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl">
+            
+            <!-- Tab Content: Shisha -->
             <div id="shisha" class="menu-category-content active">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">كلاسيك</span>
-                            <h4 class="text-2xl font-bold mb-3">نعناع / تفاحتين / عنب</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">3,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">سبيشال</span>
-                            <h4 class="text-2xl font-bold mb-3">بغدادية / ريحانة</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">3,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">طبيعي</span>
-                            <h4 class="text-2xl font-bold mb-3">طبيعي برتقال</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">8,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1589802829985-817e51181b92?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">فخامة</span>
-                            <h4 class="text-2xl font-bold mb-3">طبيعي اناناس</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">15,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">نعناع</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">علك نعناع</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">انكليزي</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ليمون</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">تفاحتين</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بطيخ</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">عنب</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ريحانة</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بغدادية</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">طبيعي برتقال</div></div><div class="item-price">8,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1589802829985-817e51181b92?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">طبيعي اناناس</div></div><div class="item-price">15,000 د.ع</div></div>
             </div>
 
+            <!-- Tab Content: Juices -->
             <div id="juices" class="menu-category-content">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1600271886332-699bb2798b9b?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">فريش</span>
-                            <h4 class="text-2xl font-bold mb-3">برتقال / ليمون</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">2,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">كوكتيل</span>
-                            <h4 class="text-2xl font-bold mb-3">كوكتيل / جوز الهند</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">1,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1497534446932-c946e7316ad1?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">سبيشال</span>
-                            <h4 class="text-2xl font-bold mb-3">موز ونوتيلا</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">2,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">موسمي</span>
-                            <h4 class="text-2xl font-bold mb-3">عصير بطيخ / شمزي</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">1,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1600271886332-699bb2798b9b?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">برتقال طبيعي</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ليمون</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1600271886332-699bb2798b9b?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ليمون برتقال</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">زبيب</div></div><div class="item-price">750 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">جوز الهند</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">موز ونوتيلا</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بطيخ</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كوكتيل</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">شمزي</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">موهيتو ليمون نعناع</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">موهيتو نعناع</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">موز وحليب</div></div><div class="item-price">1,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">نصف كوب ليمون</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">موهيتو فرولة</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">فرولة وموز</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">مكسيكي سبرايت</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">مكسيكي تايكر</div></div><div class="item-price">1,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">مكسيكي ريد بول</div></div><div class="item-price">3,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">حمضيات</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بلو بيري</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بلنك</div></div><div class="item-price">2,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بلنك مكسيكي</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">موهيتو سبرايت</div></div><div class="item-price">2,500 د.ع</div></div>
             </div>
 
+            <!-- Tab Content: Coffee -->
             <div id="coffee" class="menu-category-content">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">قهوة مختصة</span>
-                            <h4 class="text-2xl font-bold mb-3">اسبريسو / كابتشينو</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">1,000 - 1,500 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">لاتيه</span>
-                            <h4 class="text-2xl font-bold mb-3">سبانش لاتيه / لاتيه</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">3,000 - 3,500 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">شرقي</span>
-                            <h4 class="text-2xl font-bold mb-3">جاي / قهوة عادية</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">500 - 1,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">مميز</span>
-                            <h4 class="text-2xl font-bold mb-3">قهوة جكليتية / نسكافيه</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">1,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">جاي</div></div><div class="item-price">500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">نسكافي</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كابتشينو</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">حامض</div></div><div class="item-price">500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">قهوة جكليتية</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">قهوة عادية</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">نستلة حارة</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">هوت شوكليت</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">اسبريسو</div></div><div class="item-price">1,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">اسبريسو دبل شوت</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">لاتي</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ايس لاتي</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">سبانش لاتيه</div></div><div class="item-price">3,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ايس امريكانو</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">سبانش لاتية بارد</div></div><div class="item-price">3,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ايس موكا</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ايس كوفي</div></div><div class="item-price">2,500 د.ع</div></div>
             </div>
 
+            <!-- Tab Content: Food -->
             <div id="food" class="menu-category-content">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">سناكس</span>
-                            <h4 class="text-2xl font-bold mb-3">همبركر / تكة دجاج</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">1,500 - 2,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">حلويات</span>
-                            <h4 class="text-2xl font-bold mb-3">بانكيك / كريب</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">4,000 - 6,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">تحلية</span>
-                            <h4 class="text-2xl font-bold mb-3">تراب الملوك / كاستر</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">1,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item-card">
-                        <img src="https://images.unsplash.com/photo-1518013391915-e40643a1b2a8?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <span class="category-badge">إضافات</span>
-                            <h4 class="text-2xl font-bold mb-3">فنكر / بوشار / ليز</h4>
-                            <div class="flex justify-between items-center mt-4">
-                                <span class="price-tag">500 - 1,000 د.ع</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">همبركر عادي</div></div><div class="item-price">1,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">همبركر جبن</div></div><div class="item-price">2,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">تكه دجاج شوي</div></div><div class="item-price">1,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">شيش اجنحة متبل</div></div><div class="item-price">2,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1573014133631-45693051016d?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">فنكر</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">صحن بطيخ</div></div><div class="item-price">1,250 د.ع</div></div>
+            </div>
+
+            <!-- Tab Content: Sweets -->
+            <div id="sweets" class="menu-category-content">
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بانكيك عادي</div></div><div class="item-price">4,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بانكيك وسط</div></div><div class="item-price">5,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بانكيك VIP</div></div><div class="item-price">6,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب</div></div><div class="item-price">3,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب موز</div></div><div class="item-price">4,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب كندر</div></div><div class="item-price">4,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب محشي موز</div></div><div class="item-price">5,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب فواكة</div></div><div class="item-price">5,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب مكسرات</div></div><div class="item-price">5,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كريب VIP</div></div><div class="item-price">6,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">فوتوشيني كريب</div></div><div class="item-price">4,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بركر كريب</div></div><div class="item-price">4,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بونانا</div></div><div class="item-price">1,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كاستر</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">تراب الملوك</div></div><div class="item-price">1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كيك بالحليب</div></div><div class="item-price">1,750 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كيك 1</div></div><div class="item-price">500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">كلاص ثلج</div></div><div class="item-price">500 د.ع</div></div>
+            </div>
+
+            <!-- Tab Content: Market -->
+            <div id="market" class="menu-category-content">
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee1?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">سكائر (ماليبورو ذهبي/احمر/عربي)</div></div><div class="item-price">1,750 - 2,500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee1?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">سكائر (ماك/جكاير 3000/بارسا)</div></div><div class="item-price">750 - 1,000 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1566478431377-78a558eac46f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بوشار / كيك رمال</div></div><div class="item-price">500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1566478431377-78a558eac46f?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ليز / مزمز / شبابيك</div></div><div class="item-price">500 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بطل ماء</div></div><div class="item-price">250 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بيبسي / كولا / سفن / سبرايت (قوطية/زجاج)</div></div><div class="item-price">750 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">راني بطل / فينو بطل / دنيا بطل</div></div><div class="item-price">750 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">ترابي بطل / ديو قوطية</div></div><div class="item-price">750 د.ع</div></div>
+                <div class="menu-list-item"><img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=200" class="item-img"><div class="item-info"><div class="item-name">بومبا / بربيكان / ريد بول / تايجر</div></div><div class="item-price">1,250 - 3,000 د.ع</div></div>
             </div>
 
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-stone-900 text-white py-20">
+    <footer id="contact" class="bg-stone-900 text-white py-12">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6">كافتيريا الربيع</h2>
-            <p class="mb-10 text-stone-400 text-xl">نحن هنا لنجعل أوقاتكم أكثر متعة ولذة</p>
-            <div class="flex justify-center space-x-10 space-x-reverse text-3xl mb-12">
-                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all transform hover:scale-110"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all transform hover:scale-110"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all transform hover:scale-110"><i class="fab fa-whatsapp"></i></a>
+            <h2 class="text-3xl font-black mb-4">كافتيريا الربيع</h2>
+            <div class="flex justify-center space-x-8 space-x-reverse text-2xl mb-6">
+                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p class="text-stone-500">© 2026 كافتيريا الربيع. جميع الحقوق محفوظة.</p>
+            <p class="text-stone-500 text-sm">© 2026 كافتيريا الربيع. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <script>
         function showCategory(categoryId) {
-            // Hide all category contents
             const contents = document.querySelectorAll('.menu-category-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Deactivate all buttons
+            contents.forEach(content => { content.classList.remove('active'); });
             const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
+            buttons.forEach(btn => { btn.classList.remove('active'); });
+            const activeContent = document.getElementById(categoryId);
+            activeContent.classList.add('active');
+            document.getElementById('btn-' + categoryId).classList.add('active');
+            
+            // Scroll to menu section when a tab is clicked
+            window.scrollTo({
+                top: document.getElementById('menu').offsetTop - 64,
+                behavior: 'smooth'
             });
 
-            // Show selected category content
-            document.getElementById(categoryId).classList.add('active');
-
-            // Activate selected button
-            document.getElementById('btn-' + categoryId).classList.add('active');
+            const items = activeContent.querySelectorAll('.menu-list-item');
+            items.forEach((item, index) => {
+                item.classList.remove('show');
+                setTimeout(() => { item.classList.add('show'); }, index * 50);
+            });
         }
+        window.onload = () => { showCategory('shisha'); };
     </script>
 </body>
 </html>
