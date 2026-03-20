@@ -137,4 +137,247 @@
     </section>
 
     <!-- Menu Section with Tabs -->
-    <sectio...
+    <section id="menu" class="py-32">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-6xl font-bold text-stone-800 section-title">قائمة المذاق الرفيع</h2>
+                <p class="text-stone-500 mt-6 text-xl max-w-2xl mx-auto">اختر الفئة التي تفضلها لتشاهد تشكيلتنا المختارة</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center gap-4 mb-20">
+                <button onclick="showCategory('shisha')" id="btn-shisha" class="tab-btn active px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
+                    <i class="fas fa-wind"></i> الأراجيل
+                </button>
+                <button onclick="showCategory('juices')" id="btn-juices" class="tab-btn px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
+                    <i class="fas fa-glass-water"></i> العصائر
+                </button>
+                <button onclick="showCategory('coffee')" id="btn-coffee" class="tab-btn px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
+                    <i class="fas fa-mug-hot"></i> المشروبات الساخنة
+                </button>
+                <button onclick="showCategory('food')" id="btn-food" class="tab-btn px-8 py-4 rounded-full text-xl font-bold bg-white text-stone-700 border-2 border-stone-200 hover:border-orange-600 flex items-center gap-3">
+                    <i class="fas fa-utensils"></i> المأكولات والحلويات
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="shisha" class="menu-category-content active">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">كلاسيك</span>
+                            <h4 class="text-2xl font-bold mb-3">نعناع / تفاحتين / عنب</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">3,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">سبيشال</span>
+                            <h4 class="text-2xl font-bold mb-3">بغدادية / ريحانة</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">3,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">طبيعي</span>
+                            <h4 class="text-2xl font-bold mb-3">طبيعي برتقال</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">8,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1589802829985-817e51181b92?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">فخامة</span>
+                            <h4 class="text-2xl font-bold mb-3">طبيعي اناناس</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">15,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="juices" class="menu-category-content">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1600271886332-699bb2798b9b?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">فريش</span>
+                            <h4 class="text-2xl font-bold mb-3">برتقال / ليمون</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">2,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">كوكتيل</span>
+                            <h4 class="text-2xl font-bold mb-3">كوكتيل / جوز الهند</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">1,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1497534446932-c946e7316ad1?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">سبيشال</span>
+                            <h4 class="text-2xl font-bold mb-3">موز ونوتيلا</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">2,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">موسمي</span>
+                            <h4 class="text-2xl font-bold mb-3">عصير بطيخ / شمزي</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">1,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="coffee" class="menu-category-content">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">قهوة مختصة</span>
+                            <h4 class="text-2xl font-bold mb-3">اسبريسو / كابتشينو</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">1,000 - 1,500 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">لاتيه</span>
+                            <h4 class="text-2xl font-bold mb-3">سبانش لاتيه / لاتيه</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">3,000 - 3,500 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">شرقي</span>
+                            <h4 class="text-2xl font-bold mb-3">جاي / قهوة عادية</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">500 - 1,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">مميز</span>
+                            <h4 class="text-2xl font-bold mb-3">قهوة جكليتية / نسكافيه</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">1,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="food" class="menu-category-content">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">سناكس</span>
+                            <h4 class="text-2xl font-bold mb-3">همبركر / تكة دجاج</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">1,500 - 2,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">حلويات</span>
+                            <h4 class="text-2xl font-bold mb-3">بانكيك / كريب</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">4,000 - 6,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">تحلية</span>
+                            <h4 class="text-2xl font-bold mb-3">تراب الملوك / كاستر</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">1,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item-card">
+                        <img src="https://images.unsplash.com/photo-1518013391915-e40643a1b2a8?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <span class="category-badge">إضافات</span>
+                            <h4 class="text-2xl font-bold mb-3">فنكر / بوشار / ليز</h4>
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="price-tag">500 - 1,000 د.ع</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-stone-900 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">كافتيريا الربيع</h2>
+            <p class="mb-10 text-stone-400 text-xl">نحن هنا لنجعل أوقاتكم أكثر متعة ولذة</p>
+            <div class="flex justify-center space-x-10 space-x-reverse text-3xl mb-12">
+                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-stone-400 hover:text-orange-500 transition-all transform hover:scale-110"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="text-stone-500">© 2026 كافتيريا الربيع. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showCategory(categoryId) {
+            // Hide all category contents
+            const contents = document.querySelectorAll('.menu-category-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected category content
+            document.getElementById(categoryId).classList.add('active');
+
+            // Activate selected button
+            document.getElementById('btn-' + categoryId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
